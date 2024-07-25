@@ -18,7 +18,6 @@ class Lance:
 
 
 class Leilao:
-
     def __init__(self, descricao):
         self.descricao = descricao
         self.__lances = []
@@ -26,13 +25,14 @@ class Leilao:
         self.menor_lance = sys.float_info.max
 
     def propoe(self, lance: Lance):
-        if lance.valor > self.maior_lance:
-            self.maior_lance = lance.valor
+        if len(self.__lances) == 0 or self.__lances[-1].usuario != lance.usuario:
+            if lance.valor > self.maior_lance:
+                self.maior_lance = lance.valor
 
-        if lance.valor < self.menor_lance:
-            self.menor_lance = lance.valor
+            if lance.valor < self.menor_lance:
+                self.menor_lance = lance.valor
 
-        self.__lances.append(lance)
+            self.__lances.append(lance)
 
     @property
     def lances(self):
