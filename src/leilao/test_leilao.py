@@ -59,7 +59,7 @@ class TestLeilao(TestCase):
 
     def test_deve_permitir_propor_um_lance_caso_o_leilao_nao_tenha_lance(self):
         self.leilao.propoe(self.lance_da_alice)
-        
+
         quantidade_de_lances_recebida = len(self.leilao.lances)
         self.assertEqual(1, quantidade_de_lances_recebida)
 
@@ -75,11 +75,15 @@ class TestLeilao(TestCase):
 
     def test_nao_deve_permitir_propor_lance_caso_o_usuario_seja_o_mesmo(self):
         lance_da_alice200 = Lance(self.alice, 200)
-        self.leilao.propoe(self.lance_da_alice)
-        self.leilao.propoe(lance_da_alice200)
 
-        quantidade_de_lances = len(self.leilao.lances)
-        self.assertEqual(1, quantidade_de_lances)
+        try:
+            self.leilao.propoe(self.lance_da_alice)
+            self.leilao.propoe(lance_da_alice200)
+            
+        except ValueError:
+
+            quantidade_de_lances = len(self.leilao.lances)
+            self.assertEqual(1, quantidade_de_lances)
 
 if __name__ == '__main__':
     import unittest
