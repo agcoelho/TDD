@@ -59,6 +59,7 @@ class TestLeilao(TestCase):
 
     def test_deve_permitir_propor_um_lance_caso_o_leilao_nao_tenha_lance(self):
         self.leilao.propoe(self.lance_da_alice)
+        
         quantidade_de_lances_recebida = len(self.leilao.lances)
         self.assertEqual(1, quantidade_de_lances_recebida)
 
