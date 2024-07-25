@@ -84,7 +84,7 @@ test = TestAvaliador()
 
 # test.test_avalia()
 
-test.test_avalia2()
+# test.test_avalia2()
 
-# test.test_deve_retornar_o_mesmo_valor_para_maior_e_menor_lance_quando_o_leilao_tiver_um_lance()
+test.test_deve_retornar_o_mesmo_valor_para_maior_e_menor_lance_quando_o_leilao_tiver_um_lance()
 
