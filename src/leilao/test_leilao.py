@@ -27,15 +27,10 @@ class TestLeilao(TestCase):
         self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
         self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
-    def test_avalia2(self):
-        self.leilao.propoe(self.lance_do_afonso)
+    def test_nao_deve_permitir_propor_um_lance_em_ordem_decrescente(self):
         self.leilao.propoe(self.lance_da_alice)
-
-        menor_valor_esperado = 200.0
-        maior_valor_esperado = 250.0
-
-        self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
-        self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
+        with self.assertRaises(ValueError):
+            self.leilao.propoe(self.lance_do_afonso)
 
     def test_deve_retornar_o_mesmo_valor_para_maior_e_menor_lance_quando_o_leilao_tiver_um_lance(self):
         joao = Usuario('joão')
@@ -76,15 +71,14 @@ class TestLeilao(TestCase):
     def test_nao_deve_permitir_propor_lance_caso_o_usuario_seja_o_mesmo(self):
         lance_da_alice200 = Lance(self.alice, 200)
 
-        try:
-            self.leilao.propoe(self.lance_da_alice)
+        self.leilao.propoe(self.lance_da_alice)
+
+        with self.assertRaises(ValueError):
             self.leilao.propoe(lance_da_alice200)
-            self.fail(msg='Não lançou exceção')
 
-        except ValueError:
+        quantidade_de_lances = len(self.leilao.lances)
+        self.assertEqual(1, quantidade_de_lances)
 
-            quantidade_de_lances = len(self.leilao.lances)
-            self.assertEqual(1, quantidade_de_lances)
 
 if __name__ == '__main__':
     import unittest
