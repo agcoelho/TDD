@@ -28,8 +28,8 @@ class TestAvaliador(TestCase):
         avaliador.avalia(leilao)
         print(f'O menor lance foi de {avaliador.menor_lance} e o maior foi de {avaliador.maior_lance}')
 
-        menor_valor_esperado = 100.0
-        maior_valor_esperado = 100.0
+        menor_valor_esperado = 200.0
+        maior_valor_esperado = 250.0
 
         self.assertEqual(menor_valor_esperado, avaliador.menor_lance)
         self.assertEqual(maior_valor_esperado, avaliador.maior_lance)
@@ -115,11 +115,11 @@ class TestAvaliador(TestCase):
 
 test = TestAvaliador()
 
-# test.test_avalia()
+test.test_avalia()
 
-# test.test_avalia2()
+test.test_avalia2()
 
-# test.test_deve_retornar_o_mesmo_valor_para_maior_e_menor_lance_quando_o_leilao_tiver_um_lance()
+test.test_deve_retornar_o_mesmo_valor_para_maior_e_menor_lance_quando_o_leilao_tiver_um_lance()
 
 test.test_deve_retornar_o_maior_e_o_menor_valor_quando_o_leilao_tiver_tres_lances()
 
