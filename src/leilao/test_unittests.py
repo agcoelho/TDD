@@ -9,7 +9,7 @@ from dominio import Avaliador, Lance, Leilao, Usuario
 
 class TestAvaliador(TestCase):
 
-    def cria_cenario(self):
+    def setUp(self):
         self.afonso = Usuario('Afonso')
         self.alice = Usuario('Alice')
         self.alita = Usuario('Alita')
@@ -25,8 +25,8 @@ class TestAvaliador(TestCase):
 
 
 
-        self.leilao.lances.append(self.lance_da_alice)
-        self.leilao.lances.append(self.lance_do_afonso)
+        self.leilao.propoe(self.lance_da_alice)
+        self.leilao.propoe(self.lance_do_afonso)
 
 
         avaliador = Avaliador()
@@ -43,8 +43,8 @@ class TestAvaliador(TestCase):
 
     def test_avalia2(self):
 
-        self.leilao.lances.append(self.lance_do_afonso)
-        self.leilao.lances.append(self.lance_da_alice)
+        self.leilao.propoe(self.lance_do_afonso)
+        self.leilao.propoe(self.lance_da_alice)
       
 
 
@@ -66,7 +66,7 @@ class TestAvaliador(TestCase):
 
 
         leilao = Leilao('celular')
-        leilao.lances.append(lance)
+        leilao.propoe(lance)
 
         avaliador = Avaliador()
         avaliador.avalia(leilao)
@@ -76,9 +76,9 @@ class TestAvaliador(TestCase):
 
     def test_deve_retornar_o_maior_e_o_menor_valor_quando_o_leilao_tiver_tres_lances(self):
 
-        self.leilao.lances.append(self.lance_do_afonso)
-        self.leilao.lances.append(self.lance_da_alice)
-        self.leilao.lances.append(self.lance_da_alita)
+        self.leilao.propoe(self.lance_do_afonso)
+        self.leilao.propoe(self.lance_da_alice)
+        self.leilao.propoe(self.lance_da_alita)
       
 
 
@@ -99,7 +99,7 @@ class TestAvaliador(TestCase):
 
 test = TestAvaliador()
 
-test.cria_cenario()
+test.setUp()
 
 test.test_avalia()
 
