@@ -79,7 +79,8 @@ class TestLeilao(TestCase):
         try:
             self.leilao.propoe(self.lance_da_alice)
             self.leilao.propoe(lance_da_alice200)
-            
+            self.fail(msg='Não lançou exceção')
+
         except ValueError:
 
             quantidade_de_lances = len(self.leilao.lances)
