@@ -16,7 +16,7 @@ class TestAvaliador(TestCase):
 
         self.lance_da_alice = Lance(self.alice, 250)
         self.lance_do_afonso = Lance(self.afonso, 200)
-        lance_da_alita = Lance(self.alita, 500)
+        self.lance_da_alita = Lance(self.alita, 500)
 
         
         self.leilao = Leilao('celular')
@@ -98,6 +98,8 @@ class TestAvaliador(TestCase):
 
 
 test = TestAvaliador()
+
+test.cria_cenario()
 
 test.test_avalia()
 
