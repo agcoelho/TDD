@@ -9,23 +9,28 @@ from dominio import Avaliador, Lance, Leilao, Usuario
 
 class TestAvaliador(TestCase):
 
-    def test_avalia(self):
+    def cria_cenario(self):
+        self.afonso = Usuario('Afonso')
+        self.alice = Usuario('Alice')
+        self.alita = Usuario('Alita')
+
+        self.lance_da_alice = Lance(self.alice, 250)
+        self.lance_do_afonso = Lance(self.afonso, 200)
+        lance_da_alita = Lance(self.alita, 500)
+
         
-        afonso = Usuario('Afonso')
-        alice = Usuario('Alice')
+        self.leilao = Leilao('celular')
 
-        lance_da_alice = Lance(alice, 250)
-        lance_do_afonso = Lance(afonso, 200)
+    def test_avalia(self):
 
 
-        leilao = Leilao('celular')
 
-        leilao.lances.append(lance_da_alice)
-        leilao.lances.append(lance_do_afonso)
+        self.leilao.lances.append(self.lance_da_alice)
+        self.leilao.lances.append(self.lance_do_afonso)
 
 
         avaliador = Avaliador()
-        avaliador.avalia(leilao)
+        avaliador.avalia(self.leilao)
         print(f'O menor lance foi de {avaliador.menor_lance} e o maior foi de {avaliador.maior_lance}')
 
         menor_valor_esperado = 200.0
@@ -37,23 +42,14 @@ class TestAvaliador(TestCase):
 
 
     def test_avalia2(self):
-        
-        afonso = Usuario('Afonso')
-        alice = Usuario('Alice')
 
-        lance_da_alice = Lance(alice, 250)
-        lance_do_afonso = Lance(afonso, 200)
-
-
-        leilao = Leilao('celular')
-
-        leilao.lances.append(lance_do_afonso)
-        leilao.lances.append(lance_da_alice)
+        self.leilao.lances.append(self.lance_do_afonso)
+        self.leilao.lances.append(self.lance_da_alice)
       
 
 
         avaliador = Avaliador()
-        avaliador.avalia(leilao)
+        avaliador.avalia(self.leilao)
         print(f'O menor lance foi de {avaliador.menor_lance} e o maior foi de {avaliador.maior_lance}')
 
         menor_valor_esperado = 200.0
@@ -80,26 +76,14 @@ class TestAvaliador(TestCase):
 
     def test_deve_retornar_o_maior_e_o_menor_valor_quando_o_leilao_tiver_tres_lances(self):
 
-        afonso = Usuario('Afonso')
-        alice = Usuario('Alice')
-        alita = Usuario('Alita')
-
-
-        lance_da_alice = Lance(alice, 250)
-        lance_do_afonso = Lance(afonso, 200)
-        lance_da_alita = Lance(alita, 500)
-
-
-        leilao = Leilao('celular')
-
-        leilao.lances.append(lance_do_afonso)
-        leilao.lances.append(lance_da_alice)
-        leilao.lances.append(lance_da_alita)
+        self.leilao.lances.append(self.lance_do_afonso)
+        self.leilao.lances.append(self.lance_da_alice)
+        self.leilao.lances.append(self.lance_da_alita)
       
 
 
         avaliador = Avaliador()
-        avaliador.avalia(leilao)
+        avaliador.avalia(self.leilao)
         print(f'O menor lance foi de {avaliador.menor_lance} e o maior foi de {avaliador.maior_lance}')
 
         menor_valor_esperado = 200.0
